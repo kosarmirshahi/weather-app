@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       width: {
-        48: "48%",
+        48: "45%",
         150: "80px",
         18: "18%",
       },

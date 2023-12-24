@@ -1,116 +1,32 @@
-import temperature from "../../assets/Vector.png";
-import rain from "../../assets/rain.png";
-import wind from "../../assets/wind.png";
-import water from "../../assets/water.png";
-import sun from "../../assets/sun.png";
-import rainy from "../../assets/rainwind.png";
 import icon from "../../assets/mahicon.png";
+import background from "../../assets/Background.png";
+import Rest from "../RestOfInformation/Rest";
 
 function Result() {
   return (
-    <div className="container flex justify-between p-5 text-white">
+    <div className="container flex justify-around p-5 text-white mt-7">
       <div className="rightSection w-48 bg-[#16161F] rounded-xl p-5">
-        <div>
-          <p>now...</p>
-        </div>
-        <div className="mah flex flex-col gap-y-56">
-          <div>
-            <p>Tehran- Varamin</p>
-            <p>25th april</p>
-          </div>
-          <div className="flex">
-            <div>28 C</div>
-            <div>
-              <img src={icon} alt="pic" />
+        <div className="mah relative rounded-xl h-[540px]">
+          <img
+            src={background}
+            alt="background"
+            className="absolute z-10 w-full h-full object-cover rounded-xl"
+          />
+          <div className="flex flex-col justify-between h-full p-7">
+            <div className="z-10 text-3xl flex flex-col gap-y-4">
+              <p>Tehran- Varamin</p>
+              <p className="text-xl">25th april</p>
+            </div>
+            <div className="flex z-10 items-center justify-around">
+              <div className="text-7xl">28 C</div>
+              <div>
+                <img src={icon} alt="pic" />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="leftSection w-48 flex flex-col gap-y-2.5">
-        <div className="top bg-[#16161F] p-5 rounded-xl px-8 flex flex-col gap-y-8">
-          <div>
-            <p>more...</p>
-          </div>
-
-          <div className="flex justify-between ">
-            <div className="flex gap-x-3">
-              <img src={temperature} alt="pic" />
-              <p>temperature</p>
-            </div>
-            <div>
-              <p>26c</p>
-            </div>
-          </div>
-          <div className="flex justify-between ">
-            <div className="flex gap-x-3">
-              <img src={rain} alt="pic" />
-              <p>Chance of rain</p>
-            </div>
-            <div>
-              <p>10%</p>
-            </div>
-          </div>
-          <div className="flex justify-between ">
-            <div className="flex gap-x-3">
-              <img src={wind} alt="pic" />
-              <p>wind speed</p>
-            </div>
-            <div>
-              <p>8km/h</p>
-            </div>
-          </div>
-          <div className="flex justify-between ">
-            <div className="flex gap-x-3">
-              <img src={water} alt="pic" />
-              <p>water purity</p>
-            </div>
-            <div>
-              <p>40%</p>
-            </div>
-          </div>
-          <div className="flex justify-between ">
-            <div className="flex gap-x-3">
-              <img src={sun} alt="pic" />
-              <p>sun degree</p>
-            </div>
-            <div>
-              <p>5</p>
-            </div>
-          </div>
-        </div>
-        <div className="buttom bg-[#16161F] p-5 rounded-xl px-8 text-xs flex flex-col gap-y-5">
-          <div className="">
-            <p>The status of the next five days:</p>
-          </div>
-          <div className="allCards flex justify-between">
-            <div className="flex flex-col text-center w-18">
-              <p>Sunday</p>
-              <img className="w-150 h-150" src={rainy} alt="rain" />
-              <p>26c</p>
-            </div>
-            <div className="flex flex-col text-center w-18">
-              <p>Sunday</p>
-              <img className="w-150 h-150" src={rainy} alt="rain" />
-              <p>26c</p>
-            </div>
-            <div className="flex flex-col text-center w-18">
-              <p>Sunday</p>
-              <img className="w-150 h-150" src={rainy} alt="rain" />
-              <p>26c</p>
-            </div>
-            <div className="flex flex-col text-center w-18">
-              <p>Sunday</p>
-              <img className="w-150 h-150" src={rainy} alt="rain" />
-              <p>26c</p>
-            </div>
-            <div className="flex flex-col text-center w-18">
-              <p>Sunday</p>
-              <img className="w-150 h-150" src={rainy} alt="rain" />
-              <p>26c</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Rest />
     </div>
   );
 }
