@@ -4,6 +4,9 @@ import wind from "../../assets/wind.png";
 import water from "../../assets/water.png";
 import sun from "../../assets/sun.png";
 import rainy from "../../assets/rainwind.png";
+import sunny from "../../assets/22.png";
+import cloudy from "../../assets/33.png";
+
 function Rest() {
   return (
     <div className="leftSection w-48 flex flex-col gap-y-2.5">
@@ -70,7 +73,7 @@ function Rest() {
           </div>
           <div className="flex flex-col text-center w-18">
             <p>Sunday</p>
-            <img className="w-150 h-150" src={rainy} alt="rain" />
+            <img className="w-150 h-150" src={sunny} alt="rain" />
             <p>26c</p>
           </div>
           <div className="flex flex-col text-center w-18">
@@ -80,7 +83,7 @@ function Rest() {
           </div>
           <div className="flex flex-col text-center w-18">
             <p>Sunday</p>
-            <img className="w-150 h-150" src={rainy} alt="rain" />
+            <img className="w-150 h-150" src={cloudy} alt="rain" />
             <p>26c</p>
           </div>
           <div className="flex flex-col text-center w-18">
