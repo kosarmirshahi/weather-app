@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import Logo from "../../assets/Logo.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 function MainPage() {
   const [inputValue, setInputValue] = useState<string>("");
   const [searchResult, setSearchResult] = useState<string[]>([]);
-  // console.log(inputValue);
+  const navigate = useNavigate();
 
   const accessToken =
     "pk.eyJ1IjoiYW1pcm5iayIsImEiOiJja3JjY210cWYwam53MzBwZW1yYTZtN2phIn0.5Jx88DAjR4jh0QJ-kXHYoQ";
@@ -25,9 +27,14 @@ function MainPage() {
 
     fetchSearchResult();
   }, [inputValue]);
-  console.log(searchResult);
 
-  function handleSubmit() {}
+  function handleClickSuggest(suggest: string) {
+    const lat = suggest.center[0];
+    const long = suggest.center[1];
+    localStorage.setItem("latitude", lat.toString());
+    localStorage.setItem("longitude", long.toString());
+    navigate(`/weather`);
+  }
   return (
     <>
       <div className="container w-1/3 m-auto text-white flex flex-col gap-y-16 text-center mt-12">
@@ -39,7 +46,7 @@ function MainPage() {
           <p>The World Behind Your Window !!</p>
         </div>
         <div className="form">
-          <form onSubmit={handleSubmit}>
+          <form>
             <input
               type="text"
               placeholder="Enter the name of city"
@@ -52,7 +59,10 @@ function MainPage() {
       </div>
       <div className="suggests w-1/3 m-auto text-white flex flex-col gap-y-1 mt-1">
         {searchResult.map((suggest) => (
-          <div className="bg-[#3B3B54] h-14 rounded-lg pl-2.5 text-xs flex items-center">
+          <div
+            className="bg-[#3B3B54] h-14 rounded-lg pl-2.5 text-xs flex items-center"
+            onClick={() => handleClickSuggest(suggest)}
+          >
             <p>{suggest.place_name}</p>
           </div>
         ))}
