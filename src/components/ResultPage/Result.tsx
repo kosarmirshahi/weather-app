@@ -3,21 +3,30 @@ import axios from "axios";
 import icon from "../../assets/mahicon.png";
 import background from "../../assets/Background.png";
 import Rest from "../RestOfInformation/Rest";
-
+import { useLocation } from "react-router-dom";
 function Result() {
-  const latitude = localStorage.getItem("latitude");
-  const longitude = localStorage.getItem("longitude");
+  // const latitude = localStorage.getItem("latitude");
+  // const longitude = localStorage.getItem("longitude");
   // localStorage.clear();
+  // const { lat, long } = useParams();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const lat = searchParams.get("lat");
+  const long = searchParams.get("long");
+  // Access different properties of the location object
+  // const { pathname, search, hash } = location;
+  console.log(lat, long);
+
   const [information, setInformation] = useState<string[]>([]);
   const token = "3b97dacd87324ddab9a105735232612";
   useEffect(() => {
     async function fetchWeather() {
       try {
         const response = await axios.get(
-          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min&current_weather=true&timezone=auto`
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min&current_weather=true&timezone=auto`
         );
         setInformation(response);
-        localStorage.clear();
+        // localStorage.clear();
       } catch (error) {
         console.error("Error fetching data:", error);
       }

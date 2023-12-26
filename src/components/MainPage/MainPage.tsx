@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Logo from "../../assets/Logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 function MainPage() {
   const [inputValue, setInputValue] = useState<string>("");
   const [searchResult, setSearchResult] = useState<string[]>([]);
@@ -31,9 +31,9 @@ function MainPage() {
   function handleClickSuggest(suggest: string) {
     const lat = suggest.center[0];
     const long = suggest.center[1];
-    localStorage.setItem("latitude", lat.toString());
-    localStorage.setItem("longitude", long.toString());
-    navigate(`/weather`);
+    // localStorage.setItem("latitude", lat.toString());
+    // localStorage.setItem("longitude", long.toString());
+    navigate(`/weather/?lat=${lat}&long=${long}`);
   }
   return (
     <>
@@ -57,14 +57,24 @@ function MainPage() {
           </form>
         </div>
       </div>
-      <div className="suggests w-1/3 m-auto text-white flex flex-col gap-y-1 mt-1">
+      <div
+        className="suggests w-1/3 m-auto text-white flex flex-col gap-y-1 mt-1"
+        key={0}
+      >
         {searchResult.map((suggest) => (
-          <div
-            className="bg-[#3B3B54] h-14 rounded-lg pl-2.5 text-xs flex items-center cursor-pointer"
-            onClick={() => handleClickSuggest(suggest)}
+          <Link
+            to={{
+              pathname: "/weather",
+              search: `?lat=${suggest.center[0]}&long=${suggest.center[1]}`,
+            }}
           >
-            <p>{suggest.place_name}</p>
-          </div>
+            <div
+              className="bg-[#3B3B54] h-14 rounded-lg pl-2.5 text-xs flex items-center cursor-pointer"
+              onClick={() => handleClickSuggest(suggest)}
+            >
+              <p>{suggest.place_name}</p>
+            </div>
+          </Link>
         ))}
       </div>
     </>
