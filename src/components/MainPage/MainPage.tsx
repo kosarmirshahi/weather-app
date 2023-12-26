@@ -60,7 +60,7 @@ function MainPage() {
       <div className="suggests w-1/3 m-auto text-white flex flex-col gap-y-1 mt-1">
         {searchResult.map((suggest) => (
           <div
-            className="bg-[#3B3B54] h-14 rounded-lg pl-2.5 text-xs flex items-center"
+            className="bg-[#3B3B54] h-14 rounded-lg pl-2.5 text-xs flex items-center cursor-pointer"
             onClick={() => handleClickSuggest(suggest)}
           >
             <p>{suggest.place_name}</p>

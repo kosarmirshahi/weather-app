@@ -9,21 +9,22 @@ function Result() {
   const longitude = localStorage.getItem("longitude");
   // localStorage.clear();
   const [information, setInformation] = useState<string[]>([]);
-  const token = "d14adfbb5367bc704722d0ebd228f5a4";
+  const token = "3b97dacd87324ddab9a105735232612";
   useEffect(() => {
     async function fetchWeather() {
       try {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${token}`
+          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min&current_weather=true&timezone=auto`
         );
-        setInformation(response.data);
+        setInformation(response);
+        localStorage.clear();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
 
     fetchWeather();
-  }, []);
+  }, [latitude, longitude]);
   console.log(information);
   function changeDate() {
     const unixTimestamp = information.dt;
