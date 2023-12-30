@@ -3,9 +3,15 @@ import Logo from "../../assets/Logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
+interface Feature {
+  center: [number, number];
+  place_name: string;
+  // Add other properties as needed
+}
 function MainPage() {
   const [inputValue, setInputValue] = useState<string>("");
-  const [searchResult, setSearchResult] = useState<string[]>([]);
+  const [searchResult, setSearchResult] = useState<Feature[]>([]);
   const navigate = useNavigate();
 
   const accessToken =
@@ -37,7 +43,7 @@ function MainPage() {
   }
   return (
     <>
-      <div className="container w-1/3 m-auto text-white flex flex-col gap-y-16 text-center mt-12">
+      <div className="container w-2/3 lg:w-1/3 xl:w-1/3 m-auto text-white flex flex-col gap-y-16 text-center mt-12">
         <div className="">
           <img src={Logo} alt="pic" className="m-auto" />
         </div>

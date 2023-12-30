@@ -5,18 +5,26 @@ import background from "../../assets/Background.png";
 import Rest from "../RestOfInformation/Rest";
 import { useLocation } from "react-router-dom";
 import Loader from "../Loader/Loader";
+
+interface WeatherData {
+  timezone: string;
+  current_weather: {
+    time: number;
+    temperature: number;
+    // Add other properties as needed
+  };
+  // Add other properties as needed
+}
 function Result() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const lat = searchParams.get("lat");
   const long = searchParams.get("long");
-  // console.log(lat, long);
-
-  const [information, setInformation] = useState<string[]>([]);
+  const [information, setInformation] = useState<WeatherData | null>(null);
   const [time, setTime] = useState<number>(0);
   const [temperature, setTemperature] = useState<number>(0);
 
-  const token = "3b97dacd87324ddab9a105735232612";
+  // const token = "3b97dacd87324ddab9a105735232612";
   useEffect(() => {
     async function fetchWeather() {
       try {
@@ -26,25 +34,16 @@ function Result() {
         setInformation(response.data);
         setTime(response.data.current_weather.time);
         setTemperature(response.data.current_weather.temperature);
-        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
-
     fetchWeather();
-  }, []);
-  // console.log(information);
-  // function changeDate() {
-  //   const unixTimestamp = information.dt;
-  //   const date = new Date(unixTimestamp * 1000);
-  //   const formattedDate = date.toLocaleString();
-  //   return formattedDate;
-  // }
-  if (information === undefined) return <Loader />;
+  }, [lat, long]);
+  if (time === 0) return <Loader />;
   return (
-    <div className="container flex justify-around p-5 text-white mt-7">
-      <div className="rightSection w-48 bg-[#16161F] rounded-xl p-5">
+    <div className="container m-auto flex flex-col md:flex-row justify-between p-5 text-white mt-7">
+      <div className="rightSection w-full lg:w-45 md:w-49 sm:w-full bg-[#16161F] rounded-xl p-5">
         <div className="mah relative rounded-xl h-[540px]">
           <img
             src={background}

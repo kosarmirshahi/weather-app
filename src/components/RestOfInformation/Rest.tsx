@@ -7,11 +7,9 @@ import rainy from "../../assets/rainwind.png";
 import sunny from "../../assets/22.png";
 import cloudy from "../../assets/33.png";
 
-function Rest({ information }) {
-  console.log(information);
-
+function Rest() {
   return (
-    <div className="leftSection w-48 flex flex-col gap-y-2.5">
+    <div className="leftSection w-full lg:w-45 md:w-49 sm:w-full flex flex-col gap-y-2.5">
       <div className="top bg-[#16161F] p-5 rounded-xl px-8 flex flex-col gap-y-8">
         <div>
           <p>more information :</p>
@@ -69,29 +67,29 @@ function Rest({ information }) {
         </div>
         <div className="allCards flex justify-between">
           <div className="flex flex-col text-center w-18">
-            <p>Sunday</p>
+            <p>Saturday</p>
             <img className="w-150 h-150" src={rainy} alt="rain" />
-            <p>26c</p>
+            <p>2c</p>
           </div>
           <div className="flex flex-col text-center w-18">
             <p>Sunday</p>
             <img className="w-150 h-150" src={sunny} alt="rain" />
-            <p>26c</p>
+            <p>7c</p>
           </div>
           <div className="flex flex-col text-center w-18">
-            <p>Sunday</p>
+            <p>Monday</p>
             <img className="w-150 h-150" src={rainy} alt="rain" />
-            <p>26c</p>
+            <p>5c</p>
           </div>
           <div className="flex flex-col text-center w-18">
-            <p>Sunday</p>
+            <p>Tuesday</p>
             <img className="w-150 h-150" src={cloudy} alt="rain" />
-            <p>26c</p>
+            <p>4c</p>
           </div>
           <div className="flex flex-col text-center w-18">
-            <p>Sunday</p>
+            <p>Wednesday</p>
             <img className="w-150 h-150" src={rainy} alt="rain" />
-            <p>26c</p>
+            <p>3c</p>
           </div>
         </div>
       </div>
