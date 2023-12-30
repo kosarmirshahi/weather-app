@@ -4,20 +4,18 @@ import icon from "../../assets/mahicon.png";
 import background from "../../assets/Background.png";
 import Rest from "../RestOfInformation/Rest";
 import { useLocation } from "react-router-dom";
+import Loader from "../Loader/Loader";
 function Result() {
-  // const latitude = localStorage.getItem("latitude");
-  // const longitude = localStorage.getItem("longitude");
-  // localStorage.clear();
-  // const { lat, long } = useParams();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const lat = searchParams.get("lat");
   const long = searchParams.get("long");
-  // Access different properties of the location object
-  // const { pathname, search, hash } = location;
-  console.log(lat, long);
+  // console.log(lat, long);
 
   const [information, setInformation] = useState<string[]>([]);
+  const [time, setTime] = useState<number>(0);
+  const [temperature, setTemperature] = useState<number>(0);
+
   const token = "3b97dacd87324ddab9a105735232612";
   useEffect(() => {
     async function fetchWeather() {
@@ -25,22 +23,25 @@ function Result() {
         const response = await axios.get(
           `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min&current_weather=true&timezone=auto`
         );
-        setInformation(response);
-        // localStorage.clear();
+        setInformation(response.data);
+        setTime(response.data.current_weather.time);
+        setTemperature(response.data.current_weather.temperature);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
 
     fetchWeather();
-  }, [latitude, longitude]);
-  console.log(information);
-  function changeDate() {
-    const unixTimestamp = information.dt;
-    const date = new Date(unixTimestamp * 1000);
-    const formattedDate = date.toLocaleString();
-    return formattedDate;
-  }
+  }, []);
+  // console.log(information);
+  // function changeDate() {
+  //   const unixTimestamp = information.dt;
+  //   const date = new Date(unixTimestamp * 1000);
+  //   const formattedDate = date.toLocaleString();
+  //   return formattedDate;
+  // }
+  if (information === undefined) return <Loader />;
   return (
     <div className="container flex justify-around p-5 text-white mt-7">
       <div className="rightSection w-48 bg-[#16161F] rounded-xl p-5">
@@ -52,11 +53,14 @@ function Result() {
           />
           <div className="flex flex-col justify-between h-full p-7">
             <div className="z-10 text-3xl flex flex-col gap-y-4">
-              <p>{information.name}</p>
-              <p className="text-xl">{changeDate()}</p>
+              <p>{information.timezone}</p>
+              <p className="text-xl">{time}</p>
             </div>
             <div className="flex z-10 items-center justify-around">
-              <div className="text-7xl">28 C</div>
+              <div className="text-7xl flex">
+                <p>{temperature}</p>
+                <p> C</p>
+              </div>
               <div>
                 <img src={icon} alt="pic" />
               </div>
@@ -64,7 +68,7 @@ function Result() {
           </div>
         </div>
       </div>
-      <Rest />
+      <Rest information={information} />
     </div>
   );
 }

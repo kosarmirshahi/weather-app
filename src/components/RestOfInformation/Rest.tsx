@@ -7,7 +7,9 @@ import rainy from "../../assets/rainwind.png";
 import sunny from "../../assets/22.png";
 import cloudy from "../../assets/33.png";
 
-function Rest() {
+function Rest({ information }) {
+  console.log(information);
+
   return (
     <div className="leftSection w-48 flex flex-col gap-y-2.5">
       <div className="top bg-[#16161F] p-5 rounded-xl px-8 flex flex-col gap-y-8">
